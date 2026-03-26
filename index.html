@@ -70,7 +70,38 @@
         </div>
     </div>
 
+    <!-- Feedback Overlay -->
+    <div id="feedback-overlay" class="feedback-overlay">
+        <div class="feedback-card">
+            <div class="feedback-header">
+                <span id="feedback-icon" class="feedback-icon">✅</span>
+                <span id="feedback-text" class="feedback-text">ถูกต้อง!</span>
+            </div>
+            <div id="feedback-detail" class="feedback-detail"></div>
+            <div id="feedback-comparison" class="feedback-comparison" style="display:none">
+                <div class="fb-wrong">
+                    <img id="fb-wrong-img" src="" alt="">
+                    <span id="fb-wrong-name"></span>
+                    <span class="fb-label">เลือก</span>
+                </div>
+                <span class="fb-vs">VS</span>
+                <div class="fb-correct">
+                    <img id="fb-correct-img" src="" alt="">
+                    <span id="fb-correct-name"></span>
+                    <span class="fb-label">ถูกต้อง</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="game-screen" class="screen">
+        <div id="lives-container" class="lives-container" style="display:none">
+            <span class="lives-label">❤️ ชีวิต:</span>
+            <span id="lives-display">❤️❤️❤️</span>
+        </div>
+        
+        <div class="combo-display" id="combo-display"></div>
+
         <div class="game-top-bar">
             <div class="stat-box">
                 <span class="stat-label">SCORE</span>
@@ -152,6 +183,10 @@
                         <span class="rank-tier" id="result-rank-name">IRON</span>
                     </div>
                 </div>
+            </div>
+
+            <div id="new-high-score" class="new-high-score" style="display:none">
+                🎉 NEW HIGH SCORE! 🎉
             </div>
 
             <div class="result-stats">
