@@ -7,6 +7,20 @@
 // ==================== CDN ====================
 const CDN_BASE = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/maps/tft/icons/items/hexcore/';
 
+// ==================== FALLBACK IMAGES ====================
+// Base64 encoded placeholder image (64x64 purple hexagon with "?" mark)
+const FALLBACK_IMG = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMiIgZmlsbD0iIzMzNTI1OCIgc3Ryb2tlPSIjNjBBQkM0IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIzMiIgeT0iNDAiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZvbnQtd2VpZ2h0PSJib2xkIj7/PC90ZXh0Pjwvc3ZnPg==';
+
+// Helper function to set image with fallback
+function setImageWithFallback(imgElement, src, alt) {
+    imgElement.src = src;
+    imgElement.alt = alt || '';
+    imgElement.onerror = function() {
+        this.src = FALLBACK_IMG;
+        this.onerror = null; // Prevent infinite loop
+    };
+}
+
 // ==================== RANK SYSTEM ====================
 const TFT_RANKS = [
     { min: 5000, name: "CHALLENGER", color: "#ff4e50", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/challenger.png" },
@@ -419,11 +433,9 @@ function loadQuestion() {
     const comp2 = BASE_ITEMS.find(i => i.id === comp2Id);
     gameState.currentAnswer = questionKey;
 
-    document.getElementById('q-img-1').src = comp1.img;
-    document.getElementById('q-img-1').alt = comp1.name;
+    setImageWithFallback(document.getElementById('q-img-1'), comp1.img, comp1.name);
     document.getElementById('q-name-1').textContent = comp1.name;
-    document.getElementById('q-img-2').src = comp2.img;
-    document.getElementById('q-img-2').alt = comp2.name;
+    setImageWithFallback(document.getElementById('q-img-2'), comp2.img, comp2.name);
     document.getElementById('q-name-2').textContent = comp2.name;
 
     if (gameState.mode === 'quiz') {
@@ -452,7 +464,15 @@ function generateChoices(correctKey) {
         card.className = 'choice-card';
         card.setAttribute('data-key', key);
         card.setAttribute('draggable', 'true');
-        card.innerHTML = `<img class="choice-img" src="${item.img}" alt="${item.name}" draggable="false" /><span class="item-name">${item.name}</span>`;
+        
+        const img = document.createElement('img');
+        img.className = 'choice-img';
+        img.setAttribute('draggable', 'false');
+        setImageWithFallback(img, item.img, item.name);
+        
+        card.innerHTML = '';
+        card.appendChild(img);
+        card.innerHTML += `<span class="item-name">${item.name}</span>`;
         card.addEventListener('dragstart', handleDragStart);
         card.addEventListener('dragend', handleDragEnd);
         card.addEventListener('click', () => { if (!gameState.isAnswered) checkAnswer(key); });
@@ -597,10 +617,12 @@ function checkAnswer(selectedKey) {
         screenFlash('rgba(0, 255, 136, 0.12)');
 
         dropZone.classList.add('correct');
-        dropZone.innerHTML = `<div class="drop-zone-inner">
-            <img class="drop-result-img" src="${correctItem.img}" alt="${correctItem.name}" />
-            <span class="item-name" style="color:var(--neon-green);font-weight:700">${correctItem.name}</span>
-        </div>`;
+        const correctImg = document.createElement('img');
+        correctImg.className = 'drop-result-img';
+        setImageWithFallback(correctImg, correctItem.img, correctItem.name);
+        dropZone.innerHTML = `<div class="drop-zone-inner"></div>`;
+        dropZone.querySelector('.drop-zone-inner').appendChild(correctImg);
+        dropZone.querySelector('.drop-zone-inner').innerHTML += `<span class="item-name" style="color:var(--neon-green);font-weight:700">${correctItem.name}</span>`;
 
         const dzRect = dropZone.getBoundingClientRect();
         const comboText = combo.mult > 1 ? ` (x${combo.mult})` : '';
@@ -624,10 +646,12 @@ function checkAnswer(selectedKey) {
         setTimeout(() => document.body.classList.remove('screen-shake'), 400);
 
         dropZone.classList.add('wrong');
-        dropZone.innerHTML = `<div class="drop-zone-inner">
-            <img class="drop-result-img" src="${correctItem.img}" alt="${correctItem.name}" />
-            <span class="item-name" style="color:var(--neon-red);font-weight:700">${correctItem.name}</span>
-        </div>`;
+        const wrongImg = document.createElement('img');
+        wrongImg.className = 'drop-result-img';
+        setImageWithFallback(wrongImg, correctItem.img, correctItem.name);
+        dropZone.innerHTML = `<div class="drop-zone-inner"></div>`;
+        dropZone.querySelector('.drop-zone-inner').appendChild(wrongImg);
+        dropZone.querySelector('.drop-zone-inner').innerHTML += `<span class="item-name" style="color:var(--neon-red);font-weight:700">${correctItem.name}</span>`;
 
         updateComboDisplay();
         const wrongItem = selectedKey ? COMBINED_ITEMS[selectedKey] : null;
@@ -673,9 +697,9 @@ function showFeedback(isCorrect, text, detail, wrongItem, correctItem) {
     const comparison = document.getElementById('feedback-comparison');
     if (!isCorrect && wrongItem && correctItem) {
         comparison.style.display = 'flex';
-        document.getElementById('fb-wrong-img').src = wrongItem.img;
+        setImageWithFallback(document.getElementById('fb-wrong-img'), wrongItem.img, wrongItem.name);
         document.getElementById('fb-wrong-name').textContent = wrongItem.name;
-        document.getElementById('fb-correct-img').src = correctItem.img;
+        setImageWithFallback(document.getElementById('fb-correct-img'), correctItem.img, correctItem.name);
         document.getElementById('fb-correct-name').textContent = correctItem.name;
     } else {
         comparison.style.display = 'none';
@@ -739,7 +763,7 @@ function showCheatSheet() {
     let html = '<div class="cheatsheet"><h2>📖 TFT Item Cheat Sheet</h2><div class="cheatsheet-grid">';
     
     BASE_ITEMS.forEach(base => {
-        html += `<div class="cs-item cs-base"><img src="${base.img}" alt="${base.name}"><span>${base.name}</span></div>`;
+        html += `<div class="cs-item cs-base"><img src="${base.img}" alt="${base.name}" onerror="this.src='${FALLBACK_IMG}'"><span>${base.name}</span></div>`;
     });
     
     html += '</div><div class="cheatsheet-grid">';
@@ -749,9 +773,9 @@ function showCheatSheet() {
         const comp1 = BASE_ITEMS.find(i => i.id === id1);
         const comp2 = BASE_ITEMS.find(i => i.id === id2);
         html += `<div class="cs-item cs-combined">
-            <div class="cs-recipe"><img src="${comp1.img}" alt=""><span>+</span><img src="${comp2.img}" alt=""></div>
+            <div class="cs-recipe"><img src="${comp1.img}" alt="" onerror="this.src='${FALLBACK_IMG}'"><span>+</span><img src="${comp2.img}" alt="" onerror="this.src='${FALLBACK_IMG}'"></div>
             <span class="cs-arrow">→</span>
-            <img src="${item.img}" alt="${item.name}">
+            <img src="${item.img}" alt="${item.name}" onerror="this.src='${FALLBACK_IMG}'">
             <span>${item.name}</span>
         </div>`;
     });
