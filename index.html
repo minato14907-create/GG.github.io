@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="th">
+    echo "# GG.github.io" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/minato14907-create/GG.github.io.git
+git push -u origin main
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFT Item Forge — จำไอเท็ม TFT</title>
+    <meta name="description" content="เกมทดสอบความจำไอเท็ม TFT — ลากไอเท็มเพื่อตอบคำถามว่าตีอะไรได้อะไร">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Global Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <canvas id="particles"></canvas>
+    <div id="confetti-container"></div>
+    <div id="screen-flash" class="screen-flash"></div>
+
+    <!-- Achievement Toast -->
+    <div id="achievement-toast" class="achievement-toast">
+        <div class="ach-icon-wrap"><span class="ach-icon"></span></div>
+        <div class="ach-info">
+            <span class="ach-label">🏅 Achievement Unlocked!</span>
+            <span class="ach-name"></span>
+            <span class="ach-desc"></span>
+        </div>
+    </div>
+
+    <!-- ==================== START SCREEN ==================== -->
+    <div id="start-screen" class="screen active">
+        <div class="logo-container">
+            <div class="logo-hex">
+                <span class="logo-icon">⚔️</span>
+            </div>
+            <h1 class="logo-title">TFT ITEM FORGE</h1>
+            <p class="logo-subtitle">ทดสอบความจำไอเท็ม — ตีอะไรได้อะไร?</p>
+        </div>
+
+        <div class="mode-selector">
+            <button class="mode-btn" id="btn-quiz" onclick="startGame('quiz')">
+                <div class="mode-icon">🎯</div>
+                <div class="mode-info">
+                    <span class="mode-name">Quiz Mode</span>
+                    <span class="mode-desc">ลากไอเท็มเพื่อตอบ 15 คำถาม</span>
+                </div>
+                <div class="mode-arrow">→</div>
+            </button>
+            <button class="mode-btn" id="btn-endless" onclick="startGame('endless')">
+                <div class="mode-icon">♾️</div>
+                <div class="mode-info">
+                    <span class="mode-name">Endless Mode</span>
+                    <span class="mode-desc">เล่นไปเรื่อยๆ จนหมดหัวใจ</span>
+                </div>
+                <div class="mode-arrow">→</div>
+            </button>
+            <button class="mode-btn" id="btn-cheatsheet" onclick="showCheatSheet()">
+                <div class="mode-icon">📖</div>
+                <div class="mode-info">
+                    <span class="mode-name">Cheat Sheet</span>
+                    <span class="mode-desc">ดูตารางรวมไอเท็มทั้งหมด</span>
+                </div>
+                <div class="mode-arrow">→</div>
+            </button>
+        </div>
+
+        <div class="high-score-display">
+            <span class="hs-label">🏆 HIGH SCORE</span>
+            <span class="hs-value" id="high-score-value">0</span>
+        </div>
+    </div>
+
+    <!-- ==================== GAME SCREEN ==================== -->
+    <div id="game-screen" class="screen">
+        <!-- Top Bar -->
+        <div class="game-top-bar">
+            <div class="stat-box">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="score-display">0</span>
+            </div>
+            <div class="timer-container">
+                <svg class="timer-ring" viewBox="0 0 100 100">
+                    <circle class="timer-bg" cx="50" cy="50" r="45" />
+                    <circle class="timer-progress" cx="50" cy="50" r="45" id="timer-circle" />
+                </svg>
+                <span class="timer-text" id="timer-text">10</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">STREAK</span>
+                <span class="stat-value streak-value" id="streak-display">0 🔥</span>
+            </div>
+        </div>
+
+        <!-- Combo Display -->
+        <div class="combo-display" id="combo-display" style="display:none;">
+            <span class="combo-mult"></span>
+            <span class="combo-label"></span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span class="progress-text" id="progress-text">1 / 15</span>
+        </div>
+
+        <!-- Lives (endless mode) -->
+        <div class="lives-container" id="lives-container" style="display:none;">
+            <span id="lives-display">❤️❤️❤️</span>
+        </div>
+
+        <!-- Power-ups Bar -->
+        <div class="powerups-bar">
+            <button class="pu-btn" id="pu-5050" onclick="useFiftyFifty()" title="50/50 — ลบตัวเลือกผิด 3 ตัว">
+                <span class="pu-icon">✂️</span>
+                <span class="pu-name">50/50</span>
+                <span class="pu-count" id="pu-5050-count">1</span>
+            </button>
+            <button class="pu-btn" id="pu-time" onclick="useExtraTime()" title="+5 วินาที">
+                <span class="pu-icon">⏰</span>
+                <span class="pu-name">+5s</span>
+                <span class="pu-count" id="pu-time-count">1</span>
+            </button>
+            <button class="pu-btn" id="pu-skip" onclick="useSkip()" title="ข้ามคำถามนี้">
+                <span class="pu-icon">⏭️</span>
+                <span class="pu-name">Skip</span>
+                <span class="pu-count" id="pu-skip-count">1</span>
+            </button>
+        </div>
+
+        <!-- Question Area -->
+        <div class="question-area">
+            <div class="question-label">ไอเท็มพื้นฐาน 2 ชิ้นนี้รวมกันได้อะไร?</div>
+            <div class="recipe-display">
+                <div class="recipe-item" id="recipe-item-1">
+                    <div class="item-card base-card">
+                        <img class="item-img" id="q-img-1" src="" alt="" />
+                        <span class="item-name" id="q-name-1"></span>
+                    </div>
+                </div>
+                <div class="recipe-plus">+</div>
+                <div class="recipe-item" id="recipe-item-2">
+                    <div class="item-card base-card">
+                        <img class="item-img" id="q-img-2" src="" alt="" />
+                        <span class="item-name" id="q-name-2"></span>
+                    </div>
+                </div>
+                <div class="recipe-equals">=</div>
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-inner">
+                        <span class="drop-icon">?</span>
+                        <span class="drop-text">ลากไอเท็มมาวางที่นี่</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answer Choices -->
+        <div class="choices-label">เลือกคำตอบ — ลากหรือคลิก</div>
+        <div class="choices-grid" id="choices-grid">
+            <!-- Choices generated by JS -->
+        </div>
+
+        <!-- Feedback Overlay -->
+        <div class="feedback-overlay" id="feedback-overlay">
+            <div class="feedback-content" id="feedback-content">
+                <div class="feedback-icon" id="feedback-icon"></div>
+                <div class="feedback-text" id="feedback-text"></div>
+                <div class="feedback-detail" id="feedback-detail"></div>
+                <!-- Wrong vs Correct comparison -->
+                <div class="feedback-comparison" id="feedback-comparison" style="display:none;">
+                    <div class="fb-item fb-wrong-item">
+                        <span class="fb-label">คุณเลือก</span>
+                        <img class="fb-item-img" id="fb-wrong-img" src="" alt="" />
+                        <span class="fb-item-name" id="fb-wrong-name"></span>
+                    </div>
+                    <div class="fb-arrow">→</div>
+                    <div class="fb-item fb-correct-item">
+                        <span class="fb-label">คำตอบที่ถูก</span>
+                        <img class="fb-item-img" id="fb-correct-img" src="" alt="" />
+                        <span class="fb-item-name" id="fb-correct-name"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== RESULT SCREEN ==================== -->
+    <div id="result-screen" class="screen">
+        <div class="result-container">
+            <div class="result-badge" id="result-badge">🏆</div>
+            <h2 class="result-title" id="result-title">สุดยอด!</h2>
+            <div class="new-high-score" id="new-high-score" style="display:none;">
+                ⭐ NEW HIGH SCORE! ⭐
+            </div>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="rs-value" id="final-score">0</span>
+                    <span class="rs-label">คะแนน</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-value" id="final-correct">0</span>
+                    <span class="rs-label">ตอบถูก</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-value" id="final-streak">0</span>
+                    <span class="rs-label">Best Streak</span>
+                </div>
+            </div>
+            <div class="result-accuracy">
+                <div class="accuracy-bar-bg">
+                    <div class="accuracy-bar" id="accuracy-bar"></div>
+                </div>
+                <span class="accuracy-text" id="accuracy-text">0%</span>
+            </div>
+            <div class="result-buttons">
+                <button class="btn-primary" onclick="startGame(lastMode)">🔄 เล่นอีกครั้ง</button>
+                <button class="btn-secondary" onclick="goHome()">🏠 หน้าหลัก</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CHEAT SHEET ==================== -->
+    <div id="cheatsheet-screen" class="screen">
+        <div class="cs-header">
+            <button class="btn-back" onclick="goHome()">← กลับ</button>
+            <h2 class="cs-title">📖 TFT Item Cheat Sheet</h2>
+        </div>
+        <div class="cs-table-container">
+            <table class="cs-table" id="cs-table">
+                <!-- Generated by JS -->
+            </table>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
