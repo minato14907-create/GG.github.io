@@ -22,15 +22,16 @@ function setImageWithFallback(imgElement, src, alt) {
 }
 
 // ==================== RANK SYSTEM ====================
+const RANK_CDN = 'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/';
 const TFT_RANKS = [
-    { min: 5000, name: "CHALLENGER", color: "#ff4e50", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/challenger.png" },
-    { min: 3500, name: "GRANDMASTER", color: "#ff7675", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/grandmaster.png" },
-    { min: 2500, name: "MASTER", color: "#e91e63", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/master.png" },
-    { min: 1500, name: "DIAMOND", color: "#00d2ff", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/diamond.png" },
-    { min: 1000, name: "PLATINUM", color: "#4db6ac", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/platinum.png" },
-    { min: 600,  name: "GOLD", color: "#fbc02d", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/gold.png" },
-    { min: 300,  name: "SILVER", color: "#bdc3c7", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/silver.png" },
-    { min: 0,    name: "IRON", color: "#a1887f", icon: "https://raw.githubusercontent.com/CommunityDragon/Canis/master/tier-icons/iron.png" }
+    { min: 5000, name: "CHALLENGER", color: "#ff4e50", icon: RANK_CDN + 'challenger.png' },
+    { min: 3500, name: "GRANDMASTER", color: "#ff7675", icon: RANK_CDN + 'grandmaster.png' },
+    { min: 2500, name: "MASTER", color: "#e91e63", icon: RANK_CDN + 'master.png' },
+    { min: 1500, name: "DIAMOND", color: "#00d2ff", icon: RANK_CDN + 'diamond.png' },
+    { min: 1000, name: "PLATINUM", color: "#4db6ac", icon: RANK_CDN + 'platinum.png' },
+    { min: 600,  name: "GOLD", color: "#fbc02d", icon: RANK_CDN + 'gold.png' },
+    { min: 300,  name: "SILVER", color: "#bdc3c7", icon: RANK_CDN + 'silver.png' },
+    { min: 0,    name: "IRON", color: "#a1887f", icon: RANK_CDN + 'iron.png' }
 ];
 
 function updateRankDisplay(score) {
@@ -249,8 +250,8 @@ function spawnFloatingText(text, x, y, color = '#00e5ff', size = '1.5rem') {
 function screenFlash(color) {
     const flash = document.getElementById('screen-flash');
     flash.style.background = color;
-    flash.classList.add('flash');
-    setTimeout(() => flash.classList.remove('flash'), 300);
+    flash.classList.add('active');
+    setTimeout(() => flash.classList.remove('active'), 300);
 }
 
 // ==================== PARTICLES ====================
@@ -475,6 +476,9 @@ function generateChoices(correctKey) {
         card.innerHTML += `<span class="item-name">${item.name}</span>`;
         card.addEventListener('dragstart', handleDragStart);
         card.addEventListener('dragend', handleDragEnd);
+        card.addEventListener('touchstart', handleTouchStart, { passive: false });
+        card.addEventListener('touchmove', handleTouchMove, { passive: false });
+        card.addEventListener('touchend', handleTouchEnd, { passive: false });
         card.addEventListener('click', () => { if (!gameState.isAnswered) checkAnswer(key); });
         grid.appendChild(card);
     });
@@ -780,7 +784,7 @@ function showCheatSheet() {
         </div>`;
     });
     
-    html += '</div><button class="btn-secondary" onclick="this.parentElement.remove()">ปิด</button></div>';
+    html += '</div><button class="btn-secondary" onclick="this.closest(\'.cheatsheet-overlay\').remove()">ปิด</button></div>';
     overlay.innerHTML = html;
     document.body.appendChild(overlay);
 }
