@@ -71,42 +71,50 @@ const BASE_ITEMS = [
 ];
 
 const COMBINED_ITEMS = {
-    'bf+bf': { name: 'Deathblade', img: CDN_BASE + 'tft_item_deathblade.tft_set13.png' },
-    'bf+bow': { name: 'Giant Slayer', img: CDN_STD + 'giant_slayer.png' },
-    'bf+rod': { name: 'Hextech Gunblade', img: CDN_BASE + 'tft_item_hextechgunblade.tft_set13.png' },
-    'bf+tear': { name: 'Spear of Shojin', img: CDN_BASE + 'tft_item_spearofshojin.tft_set13.png' },
-    'bf+vest': { name: 'Edge of Night', img: CDN_BASE + 'tft_item_guardianangel.tft_set13.png' },
-    'bf+cloak': { name: 'Bloodthirster', img: CDN_BASE + 'tft_item_bloodthirster.tft_set13.png' },
-    'bf+belt': { name: "Sterak's Gage", img: CDN_BASE + 'tft_item_steraksgage.tft_set13.png' },
-    'bf+glove': { name: 'Infinity Edge', img: CDN_BASE + 'tft_item_infinityedge.tft_set13.png' },
-    'bow+bow': { name: 'Red Buff', img: CDN_BASE + 'tft_item_redbuff.tft_set13.png' },
-    'bow+rod': { name: "Guinsoo's Rageblade", img: CDN_BASE + 'tft_item_guinsoosrageblade.tft_set13.png' },
-    'bow+tear': { name: 'Statikk Shiv', img: CDN_BASE + 'tft_item_rapidfirecannon.tft_set13.png' },
-    'bow+vest': { name: "Titan's Resolve", img: CDN_BASE + 'tft_item_titansresolve.tft_set13.png' },
-    'bow+cloak': { name: "Runaan's Hurricane", img: CDN_STD + 'runaans_hurricane.png' },
-    'bow+belt': { name: "Nashor's Tooth", img: CDN_BASE + 'tft_item_leviathan.tft_set13.png' },
-    'bow+glove': { name: 'Last Whisper', img: CDN_BASE + 'tft_item_lastwhisper.tft_set13.png' },
-    'rod+rod': { name: "Rabadon's Deathcap", img: CDN_BASE + 'tft_item_rabadonsdeathcap.tft_set13.png' },
-    'rod+tear': { name: "Archangel's Staff", img: CDN_BASE + 'tft_item_archangelsstaff.tft_set13.png' },
-    'rod+vest': { name: 'Crownguard', img: CDN_BASE + 'tft_item_crownguard.tft_set13.png' },
-    'rod+cloak': { name: 'Ionic Spark', img: CDN_BASE + 'tft_item_ionicspark.tft_set13.png' },
-    'rod+belt': { name: 'Morellonomicon', img: CDN_BASE + 'tft_item_morellonomicon.tft_set13.png' },
-    'rod+glove': { name: 'Jeweled Gauntlet', img: CDN_BASE + 'tft_item_jeweledgauntlet.tft_set13.png' },
-    'tear+tear': { name: 'Blue Buff', img: CDN_BASE + 'tft_item_bluebuff.tft_set13.png' },
-    'tear+vest': { name: "Protector's Vow", img: CDN_BASE + 'tft_item_frozenheart.tft_set13.png' },
-    'tear+cloak': { name: 'Adaptive Helm', img: CDN_BASE + 'tft_item_adaptivehelm.tft_set13.png' },
-    'tear+belt': { name: 'Redemption', img: CDN_STD + 'redemption.png' },
-    'tear+glove': { name: 'Hand of Justice', img: CDN_STD + 'hand_of_justice.png' },
-    'vest+vest': { name: 'Bramble Vest', img: CDN_BASE + 'tft_item_bramblevest.tft_set13.png' },
+    // BF Sword combos
+    'bf+bf':    { name: 'Deathblade',       img: CDN_BASE + 'tft_item_deathblade.tft_set13.png' },
+    'bf+bow':   { name: 'Giant Slayer',      img: CDN_BASE + 'tft_item_madredsbloodrazor.tft_set13.png' },
+    'bf+rod':   { name: 'Hextech Gunblade',  img: CDN_BASE + 'tft_item_hextechgunblade.tft_set13.png' },
+    'bf+tear':  { name: 'Spear of Shojin',   img: CDN_BASE + 'tft_item_spearofshojin.tft_set13.png' },
+    'bf+vest':  { name: 'Edge of Night',     img: CDN_BASE + 'tft_item_guardianangel.tft_set13.png' },
+    'bf+cloak': { name: 'Bloodthirster',     img: CDN_BASE + 'tft_item_bloodthirster.tft_set13.png' },
+    'bf+belt':  { name: "Sterak's Gage",     img: CDN_BASE + 'tft_item_steraksgage.tft_set13.png' },
+    'bf+glove': { name: 'Infinity Edge',     img: CDN_BASE + 'tft_item_infinityedge.tft_set13.png' },
+    // Recurve Bow combos
+    'bow+bow':   { name: 'Red Buff',          img: CDN_BASE + 'tft_item_rapidfirecannon.tft_set13.png' },
+    'bow+rod':   { name: "Guinsoo's Rageblade", img: CDN_BASE + 'tft_item_guinsoosrageblade.tft_set13.png' },
+    'bow+tear':  { name: 'Void Staff',        img: CDN_BASE + 'tft_item_voidstaff.tft_tft14_5.png' },
+    'bow+vest':  { name: "Titan's Resolve",   img: CDN_BASE + 'tft_item_titansresolve.tft_set13.png' },
+    'bow+cloak': { name: "Kraken's Fury",     img: CDN_BASE + 'tft_item_krakenslayer.tft_tft14_5.png' },
+    'bow+belt':  { name: "Nashor's Tooth",    img: CDN_BASE + 'tft_item_leviathan.tft_set13.png' },
+    'bow+glove': { name: 'Last Whisper',      img: CDN_BASE + 'tft_item_lastwhisper.tft_set13.png' },
+    // Needlessly Large Rod combos
+    'rod+rod':   { name: "Rabadon's Deathcap", img: CDN_BASE + 'tft_item_rabadonsdeathcap.tft_set13.png' },
+    'rod+tear':  { name: "Archangel's Staff",  img: CDN_BASE + 'tft_item_archangelsstaff.tft_set13.png' },
+    'rod+vest':  { name: 'Crownguard',         img: CDN_BASE + 'tft_item_crownguard.tft_set13.png' },
+    'rod+cloak': { name: 'Ionic Spark',        img: CDN_BASE + 'tft_item_ionicspark.tft_set13.png' },
+    'rod+belt':  { name: 'Morellonomicon',     img: CDN_BASE + 'tft_item_morellonomicon.tft_set13.png' },
+    'rod+glove': { name: 'Jeweled Gauntlet',   img: CDN_BASE + 'tft_item_jeweledgauntlet.tft_set13.png' },
+    // Tear of the Goddess combos
+    'tear+tear':  { name: 'Blue Buff',          img: CDN_BASE + 'tft_item_bluebuff.tft_set13.png' },
+    'tear+vest':  { name: "Protector's Vow",    img: CDN_BASE + 'tft_item_frozenheart.tft_set13.png' },
+    'tear+cloak': { name: 'Adaptive Helm',      img: CDN_BASE + 'tft_item_adaptivehelm.tft_set13.png' },
+    'tear+belt':  { name: 'Spirit Visage',      img: CDN_BASE + 'tft_item_spiritvisagerr.tft_tft14_5.png' },
+    'tear+glove': { name: 'Hand Of Justice',    img: CDN_BASE + 'tft_item_unstableconcoction.tft_set13.png' },
+    // Chain Vest combos
+    'vest+vest':  { name: 'Bramble Vest',       img: CDN_BASE + 'tft_item_bramblevest.tft_set13.png' },
     'vest+cloak': { name: 'Gargoyle Stoneplate', img: CDN_BASE + 'tft_item_gargoylestoneplate.tft_set13.png' },
-    'vest+belt': { name: 'Sunfire Cape', img: CDN_STD + 'sunfire_cape.png' },
-    'vest+glove': { name: 'Steadfast Heart', img: CDN_BASE + 'tft_item_nightharvester.tft_set13.png' },
-    'cloak+cloak': { name: "Dragon's Claw", img: CDN_BASE + 'tft_item_dragonsclaw.tft_set13.png' },
-    'cloak+belt': { name: 'Evenshroud', img: CDN_BASE + 'tft_item_spectralgauntlet.tft_set13.png' },
-    'cloak+glove': { name: 'Quicksilver', img: CDN_BASE + 'tft_item_quicksilver.tft_set13.png' },
-    'belt+belt': { name: "Warmog's Armor", img: CDN_BASE + 'tft_item_warmogsarmor.tft_set13.png' },
-    'belt+glove': { name: 'Guardbreaker', img: CDN_BASE + 'tft_item_powergauntlet.tft_set13.png' },
-    'glove+glove': { name: "Thief's Gloves", img: CDN_BASE + 'tft_item_thiefsgloves.tft_set13.png' },
+    'vest+belt':  { name: 'Sunfire Cape',       img: CDN_BASE + 'tft_item_redbuff.tft_set13.png' },
+    'vest+glove': { name: 'Steadfast Heart',    img: CDN_BASE + 'tft_item_nightharvester.tft_set13.png' },
+    // Negatron Cloak combos
+    'cloak+cloak': { name: "Dragon's Claw",    img: CDN_BASE + 'tft_item_dragonsclaw.tft_set13.png' },
+    'cloak+belt':  { name: 'Evenshroud',        img: CDN_BASE + 'tft_item_spectralgauntlet.tft_set13.png' },
+    'cloak+glove': { name: 'Quicksilver',       img: CDN_BASE + 'tft_item_quicksilver.tft_set13.png' },
+    // Giant's Belt combos
+    'belt+belt':  { name: "Warmog's Armor",    img: CDN_BASE + 'tft_item_warmogsarmor.tft_set13.png' },
+    'belt+glove': { name: "Striker's Flail",   img: CDN_BASE + 'tft_item_powergauntlet.tft_set13.png' },
+    // Sparring Gloves combos
+    'glove+glove': { name: "Thief's Gloves",   img: CDN_BASE + 'tft_item_thiefsgloves.tft_set13.png' },
 };
 
 // ==================== SOUND FX ====================
@@ -345,7 +353,12 @@ function useSkip() {
     if (powerUps.skip <= 0) document.getElementById('pu-skip').style.opacity = '0.4';
     
     playSound('powerup');
-    checkAnswer(null);
+    // Skip ไม่นับเป็นตอบผิด และไม่ลบชีวิตใน Endless Mode
+    gameState.isAnswered = true;
+    clearTimer();
+    gameState.streak = 0;
+    updateComboDisplay();
+    setTimeout(() => { gameState.currentQuestion++; loadQuestion(); }, 300);
 }
 
 // ==================== COMBO SYSTEM ====================
@@ -377,8 +390,11 @@ function updateComboDisplay() {
 function generateQuestions(count) {
     const keys = Object.keys(COMBINED_ITEMS);
     const questions = [];
+    // สุ่มแบบไม่ซ้ำ โดย shuffle แล้ว loop ซ้ำถ้าต้องการมากกว่าจำนวน keys ที่มี
+    let pool = [...keys].sort(() => Math.random() - 0.5);
     for (let i = 0; i < count; i++) {
-        questions.push(keys[Math.floor(Math.random() * keys.length)]);
+        if (pool.length === 0) pool = [...keys].sort(() => Math.random() - 0.5);
+        questions.push(pool.pop());
     }
     return questions;
 }
@@ -457,11 +473,23 @@ function loadQuestion() {
 function generateChoices(correctKey) {
     const grid = document.getElementById('choices-grid');
     grid.innerHTML = '';
-    const wrongKeys = Object.keys(COMBINED_ITEMS).filter(k => k !== correctKey).sort(() => Math.random() - 0.5).slice(0, 5);
+
+    // ดึงตัวเลือกผิด 5 อัน โดยไม่ซ้ำกับคำตอบถูก
+    const wrongKeys = Object.keys(COMBINED_ITEMS)
+        .filter(k => k !== correctKey)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 5);
+
+    // รวมและสุ่มลำดับ — correctKey ต้องอยู่ในนี้เสมอ
     const allChoices = [correctKey, ...wrongKeys].sort(() => Math.random() - 0.5);
+
+    // ตรวจสอบอีกรอบว่า correctKey อยู่จริงๆ (guard)
+    if (!allChoices.includes(correctKey)) allChoices[0] = correctKey;
 
     allChoices.forEach(key => {
         const item = COMBINED_ITEMS[key];
+        if (!item) return; // skip ถ้า key ไม่มีใน data (ป้องกัน crash)
+
         const card = document.createElement('div');
         card.className = 'choice-card';
         card.setAttribute('data-key', key);
@@ -586,7 +614,8 @@ function updateTimerDisplay() {
     const circle = document.getElementById('timer-circle');
     const text = document.getElementById('timer-text');
     const circumference = 2 * Math.PI * 45;
-    const offset = circumference * (1 - gameState.timeLeft / 10);
+    const maxTime = Math.max(10, gameState.timeLeft); // รองรับเวลาที่เกิน 10
+    const offset = circumference * (1 - gameState.timeLeft / maxTime);
     circle.style.strokeDasharray = circumference;
     circle.style.strokeDashoffset = offset;
     circle.style.stroke = gameState.timeLeft <= 3 ? 'var(--neon-red)' : '';
