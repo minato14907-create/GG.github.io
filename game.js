@@ -4,9 +4,9 @@
    Power-ups, Floating Scores, Achievements, Screen Effects, Rank System
    ================================ */
 
-// ==================== CDN ====================
-const CDN_BASE = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/maps/tft/icons/items/hexcore/';
-const CDN_STD = 'https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/standard/';
+// ==================== IMAGE HOST (GitHub repo assets) ====================
+const IMG_BASE = 'assets/items/';
+const RANK_IMG_BASE = 'assets/ranks/';
 
 // ==================== FALLBACK IMAGES ====================
 // Base64 encoded placeholder image (64x64 purple hexagon with "?" mark)
@@ -23,7 +23,7 @@ function setImageWithFallback(imgElement, src, alt) {
 }
 
 // ==================== RANK SYSTEM ====================
-const RANK_CDN = 'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-crests/';
+const RANK_CDN = RANK_IMG_BASE;
 const TFT_RANKS = [
     { min: 5000, name: "CHALLENGER", color: "#ff4e50", icon: RANK_CDN + 'challenger.png' },
     { min: 3500, name: "GRANDMASTER", color: "#ff7675", icon: RANK_CDN + 'grandmaster.png' },
@@ -60,61 +60,61 @@ function updateRankDisplay(score) {
 // ==================== ITEM DATA ====================
 
 const BASE_ITEMS = [
-    { id: 'bf', name: 'B.F. Sword', img: CDN_BASE + 'tft_item_bfsword.tft_set13.png' },
-    { id: 'bow', name: 'Recurve Bow', img: CDN_BASE + 'tft_item_recurvebow.tft_set13.png' },
-    { id: 'rod', name: 'Needlessly Large Rod', img: CDN_BASE + 'tft_item_needlesslylargerod.tft_set13.png' },
-    { id: 'tear', name: 'Tear of the Goddess', img: CDN_BASE + 'tft_item_tearofthegoddess.tft_set13.png' },
-    { id: 'vest', name: 'Chain Vest', img: CDN_BASE + 'tft_item_chainvest.tft_set13.png' },
-    { id: 'cloak', name: 'Negatron Cloak', img: CDN_BASE + 'tft_item_negatroncloak.tft_set13.png' },
-    { id: 'belt', name: "Giant's Belt", img: CDN_BASE + 'tft_item_giantsbelt.tft_set13.png' },
-    { id: 'glove', name: 'Sparring Gloves', img: CDN_BASE + 'tft_item_sparringgloves.tft_set13.png' },
+    { id: 'bf', name: 'B.F. Sword', img: IMG_BASE + 'bf.png' },
+    { id: 'bow', name: 'Recurve Bow', img: IMG_BASE + 'bow.png' },
+    { id: 'rod', name: 'Needlessly Large Rod', img: IMG_BASE + 'rod.png' },
+    { id: 'tear', name: 'Tear of the Goddess', img: IMG_BASE + 'tear.png' },
+    { id: 'vest', name: 'Chain Vest', img: IMG_BASE + 'vest.png' },
+    { id: 'cloak', name: 'Negatron Cloak', img: IMG_BASE + 'cloak.png' },
+    { id: 'belt', name: "Giant's Belt", img: IMG_BASE + 'belt.png' },
+    { id: 'glove', name: 'Sparring Gloves', img: IMG_BASE + 'glove.png' },
 ];
 
 const COMBINED_ITEMS = {
     // BF Sword combos
-    'bf+bf':    { name: 'Deathblade',       img: CDN_BASE + 'tft_item_deathblade.tft_set13.png' },
-    'bf+bow':   { name: 'Giant Slayer',      img: CDN_BASE + 'tft_item_madredsbloodrazor.tft_set13.png' },
-    'bf+rod':   { name: 'Hextech Gunblade',  img: CDN_BASE + 'tft_item_hextechgunblade.tft_set13.png' },
-    'bf+tear':  { name: 'Spear of Shojin',   img: CDN_BASE + 'tft_item_spearofshojin.tft_set13.png' },
-    'bf+vest':  { name: 'Edge of Night',     img: CDN_BASE + 'tft_item_guardianangel.tft_set13.png' },
-    'bf+cloak': { name: 'Bloodthirster',     img: CDN_BASE + 'tft_item_bloodthirster.tft_set13.png' },
-    'bf+belt':  { name: "Sterak's Gage",     img: CDN_BASE + 'tft_item_steraksgage.tft_set13.png' },
-    'bf+glove': { name: 'Infinity Edge',     img: CDN_BASE + 'tft_item_infinityedge.tft_set13.png' },
+    'bf+bf':    { name: 'Deathblade',       img: IMG_BASE + 'deathblade.png' },
+    'bf+bow':   { name: 'Giant Slayer',      img: IMG_BASE + 'giantslayer.png' },
+    'bf+rod':   { name: 'Hextech Gunblade',  img: IMG_BASE + 'hextechgunblade.png' },
+    'bf+tear':  { name: 'Spear of Shojin',   img: IMG_BASE + 'spearofshojin.png' },
+    'bf+vest':  { name: 'Edge of Night',     img: IMG_BASE + 'edgeofnight.png' },
+    'bf+cloak': { name: 'Bloodthirster',     img: IMG_BASE + 'bloodthirster.png' },
+    'bf+belt':  { name: "Sterak's Gage",     img: IMG_BASE + 'steraksgage.png' },
+    'bf+glove': { name: 'Infinity Edge',     img: IMG_BASE + 'infinityedge.png' },
     // Recurve Bow combos
-    'bow+bow':   { name: 'Red Buff',          img: CDN_BASE + 'tft_item_rapidfirecannon.tft_set13.png' },
-    'bow+rod':   { name: "Guinsoo's Rageblade", img: CDN_BASE + 'tft_item_guinsoosrageblade.tft_set13.png' },
-    'bow+tear':  { name: 'Void Staff',        img: CDN_BASE + 'tft_item_voidstaff.tft_tft14_5.png' },
-    'bow+vest':  { name: "Titan's Resolve",   img: CDN_BASE + 'tft_item_titansresolve.tft_set13.png' },
-    'bow+cloak': { name: "Kraken's Fury",     img: CDN_BASE + 'tft_item_krakenslayer.tft_tft14_5.png' },
-    'bow+belt':  { name: "Nashor's Tooth",    img: CDN_BASE + 'tft_item_leviathan.tft_set13.png' },
-    'bow+glove': { name: 'Last Whisper',      img: CDN_BASE + 'tft_item_lastwhisper.tft_set13.png' },
+    'bow+bow':   { name: 'Red Buff',          img: IMG_BASE + 'redbuff.png' },
+    'bow+rod':   { name: "Guinsoo's Rageblade", img: IMG_BASE + 'guinsoosrageblade.png' },
+    'bow+tear':  { name: 'Void Staff',        img: IMG_BASE + 'voidstaff.png' },
+    'bow+vest':  { name: "Titan's Resolve",   img: IMG_BASE + 'titansresolve.png' },
+    'bow+cloak': { name: "Kraken's Fury",     img: IMG_BASE + 'krakensfury.png' },
+    'bow+belt':  { name: "Nashor's Tooth",    img: IMG_BASE + 'nashorstooth.png' },
+    'bow+glove': { name: 'Last Whisper',      img: IMG_BASE + 'lastwhisper.png' },
     // Needlessly Large Rod combos
-    'rod+rod':   { name: "Rabadon's Deathcap", img: CDN_BASE + 'tft_item_rabadonsdeathcap.tft_set13.png' },
-    'rod+tear':  { name: "Archangel's Staff",  img: CDN_BASE + 'tft_item_archangelsstaff.tft_set13.png' },
-    'rod+vest':  { name: 'Crownguard',         img: CDN_BASE + 'tft_item_crownguard.tft_set13.png' },
-    'rod+cloak': { name: 'Ionic Spark',        img: CDN_BASE + 'tft_item_ionicspark.tft_set13.png' },
-    'rod+belt':  { name: 'Morellonomicon',     img: CDN_BASE + 'tft_item_morellonomicon.tft_set13.png' },
-    'rod+glove': { name: 'Jeweled Gauntlet',   img: CDN_BASE + 'tft_item_jeweledgauntlet.tft_set13.png' },
+    'rod+rod':   { name: "Rabadon's Deathcap", img: IMG_BASE + 'rabadonsdeathcap.png' },
+    'rod+tear':  { name: "Archangel's Staff",  img: IMG_BASE + 'archangelsstaff.png' },
+    'rod+vest':  { name: 'Crownguard',         img: IMG_BASE + 'crownguard.png' },
+    'rod+cloak': { name: 'Ionic Spark',        img: IMG_BASE + 'ionicspark.png' },
+    'rod+belt':  { name: 'Morellonomicon',     img: IMG_BASE + 'morellonomicon.png' },
+    'rod+glove': { name: 'Jeweled Gauntlet',   img: IMG_BASE + 'jeweledgauntlet.png' },
     // Tear of the Goddess combos
-    'tear+tear':  { name: 'Blue Buff',          img: CDN_BASE + 'tft_item_bluebuff.tft_set13.png' },
-    'tear+vest':  { name: "Protector's Vow",    img: CDN_BASE + 'tft_item_frozenheart.tft_set13.png' },
-    'tear+cloak': { name: 'Adaptive Helm',      img: CDN_BASE + 'tft_item_adaptivehelm.tft_set13.png' },
-    'tear+belt':  { name: 'Spirit Visage',      img: CDN_BASE + 'tft_item_spiritvisagerr.tft_tft14_5.png' },
-    'tear+glove': { name: 'Hand Of Justice',    img: CDN_BASE + 'tft_item_unstableconcoction.tft_set13.png' },
+    'tear+tear':  { name: 'Blue Buff',          img: IMG_BASE + 'bluebuff.png' },
+    'tear+vest':  { name: "Protector's Vow",    img: IMG_BASE + 'protectorsvow.png' },
+    'tear+cloak': { name: 'Adaptive Helm',      img: IMG_BASE + 'adaptivehelm.png' },
+    'tear+belt':  { name: 'Spirit Visage',      img: IMG_BASE + 'spiritvisage.png' },
+    'tear+glove': { name: 'Hand Of Justice',    img: IMG_BASE + 'handofjustice.png' },
     // Chain Vest combos
-    'vest+vest':  { name: 'Bramble Vest',       img: CDN_BASE + 'tft_item_bramblevest.tft_set13.png' },
-    'vest+cloak': { name: 'Gargoyle Stoneplate', img: CDN_BASE + 'tft_item_gargoylestoneplate.tft_set13.png' },
-    'vest+belt':  { name: 'Sunfire Cape',       img: CDN_BASE + 'tft_item_redbuff.tft_set13.png' },
-    'vest+glove': { name: 'Steadfast Heart',    img: CDN_BASE + 'tft_item_nightharvester.tft_set13.png' },
+    'vest+vest':  { name: 'Bramble Vest',       img: IMG_BASE + 'bramblevest.png' },
+    'vest+cloak': { name: 'Gargoyle Stoneplate', img: IMG_BASE + 'gargoylestoneplate.png' },
+    'vest+belt':  { name: 'Sunfire Cape',       img: IMG_BASE + 'sunfirecape.png' },
+    'vest+glove': { name: 'Steadfast Heart',    img: IMG_BASE + 'steadfastheart.png' },
     // Negatron Cloak combos
-    'cloak+cloak': { name: "Dragon's Claw",    img: CDN_BASE + 'tft_item_dragonsclaw.tft_set13.png' },
-    'cloak+belt':  { name: 'Evenshroud',        img: CDN_BASE + 'tft_item_spectralgauntlet.tft_set13.png' },
-    'cloak+glove': { name: 'Quicksilver',       img: CDN_BASE + 'tft_item_quicksilver.tft_set13.png' },
+    'cloak+cloak': { name: "Dragon's Claw",    img: IMG_BASE + 'dragonsclaw.png' },
+    'cloak+belt':  { name: 'Evenshroud',        img: IMG_BASE + 'evenshroud.png' },
+    'cloak+glove': { name: 'Quicksilver',       img: IMG_BASE + 'quicksilver.png' },
     // Giant's Belt combos
-    'belt+belt':  { name: "Warmog's Armor",    img: CDN_BASE + 'tft_item_warmogsarmor.tft_set13.png' },
-    'belt+glove': { name: "Striker's Flail",   img: CDN_BASE + 'tft_item_powergauntlet.tft_set13.png' },
+    'belt+belt':  { name: "Warmog's Armor",    img: IMG_BASE + 'warmogsarmor.png' },
+    'belt+glove': { name: "Striker's Flail",   img: IMG_BASE + 'strikersflail.png' },
     // Sparring Gloves combos
-    'glove+glove': { name: "Thief's Gloves",   img: CDN_BASE + 'tft_item_thiefsgloves.tft_set13.png' },
+    'glove+glove': { name: "Thief's Gloves",   img: IMG_BASE + 'thiefsgloves.png' },
 };
 
 // ==================== SOUND FX ====================
